@@ -1,6 +1,6 @@
-"""Sifts through Kick-starter project data and prints the total pledge average"""
-
+"""Sifts through Kick-starter project data and prints the total pledge mean"""
 import csv
+import statistics
 
 #assign csv file to a readable object
 with open('DSI_kickstarterscrape_dataset.csv','r', encoding='mac_roman') as csv_file:
@@ -9,19 +9,17 @@ with open('DSI_kickstarterscrape_dataset.csv','r', encoding='mac_roman') as csv_
     #skip variable title
     next(csv_obj)
 
-    #variable initialization
-    Totpledge = 0
-    count = 0
+    #init list of pledges
+    pledge=[]
 
-    #count total pledge for each project and number of projects
+    #create list for total pledge of each project
     for line in csv_obj:
         if line[8] is not '':
-            Totpledge = int(line[8]) + Totpledge 
-            count = count + 1
+            pledge.append(int(line[8]))
 
-    #calculate average pledge amount
-    avgPledge = Totpledge/count
-    
+    mean = statistics.mean(pledge)
     #print the average pledge amount
-    print('The average amount pledged is $' + str(avgPledge))
-     
+    print('The mean amount pledged was $' + str(mean))
+
+    #close file object
+    csv_file.close()
