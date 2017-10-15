@@ -2,6 +2,7 @@
 import csv
 import matplotlib.pyplot as plt
 from scipy.stats import skew
+import statistics
 
 #assign csv file to a readable object
 with open('DSI_kickstarterscrape_dataset.csv','r', encoding='mac_roman') as csv_file:
@@ -16,7 +17,7 @@ with open('DSI_kickstarterscrape_dataset.csv','r', encoding='mac_roman') as csv_
     #append duration for each project to a list
     for line in csv_reader:
         if line[16] is not '':
-            duration.append(int(line[16]))
+            duration.append(float(line[16]))
     
     #close file object
     csv_file.close() 
@@ -25,9 +26,9 @@ with open('DSI_kickstarterscrape_dataset.csv','r', encoding='mac_roman') as csv_
 skew = skew(duration)
 
 #init bin size
-incrmt = 100
+incrmt = 5
 #init list of bins
-bins = list(range(0, max(duration)+incrmt, incrmt))
+bins = list(range(0, int(max(duration)+incrmt), incrmt))
 
 #create histogram
 plt.hist(duration,bins, histtype='bar',rwidth=1.0)
