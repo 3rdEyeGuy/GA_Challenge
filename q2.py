@@ -22,10 +22,14 @@ print('Max backers for single campaign:', max(backers))
 
 frq = 0
 last_camp = 0
-a = 0
-b = 10
 
-while (b-10) <= max(backers):
+bin_ct = 10 
+
+a = 0
+b = bin_ct
+
+
+while (b-bin_ct) <= max(backers):
     rng = list(range(a,b+1))
 
     for line in backers:
@@ -36,11 +40,11 @@ while (b-10) <= max(backers):
     frq = 0
     
     if a == 0:
-        a = a + 11
-        b = b + 10
+        a = a + bin_ct + 1
+        b = b + bin_ct
     elif a != 0:
-        a = a + 10
-        b = b + 10
+        a = a + bin_ct
+        b = b + bin_ct
     
     last_camp = last_camp +1 
 
