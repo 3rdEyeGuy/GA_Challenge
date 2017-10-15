@@ -29,7 +29,7 @@ bins = list(range(0, max(backers)+incrmt, incrmt))
 plt.hist(backers,bins, histtype='bar',rwidth=1.0)
 plt.ylabel('Frequency')
 plt.xlabel('Backers')
-plt.title('Histogram of Backers')
+plt.title('Kickstarter Campaign Backers')
 
 #show histogram
 plt.show()
