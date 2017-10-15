@@ -64,7 +64,6 @@ with open('backers_hist_data.csv', 'w') as hist_obj:
     hist_data.writerow(['project_backers', 'frequency'])
     for bin in hist_list:
         hist_data.writerow(bin)
+
+    #close file object
     hist_obj.close() 
-
-
-
