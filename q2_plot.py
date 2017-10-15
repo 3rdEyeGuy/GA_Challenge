@@ -1,9 +1,12 @@
 import matplotlib.pyplot as plt
-import pandas as pd
+from matplotlib import style
+import numpy as np
 
-data = pd.read_csv('backers_hist_data.csv',sep=',',index_col=0)
+###style.use('ggplot')
 
-data.plot(kind='bar')
+x,y = np.loadtxt('backers_hist_data.csv', unpack=True, delimiter=',')
+
+plt.bar(x, y, width = 90)
 plt.ylabel('Frequency')
 plt.xlabel('Backers')
 plt.title('Histogram of Backers')
