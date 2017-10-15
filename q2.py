@@ -16,13 +16,14 @@ with open('DSI_kickstarterscrape_dataset.csv','r', encoding='mac_roman') as csv_
     for line in csv_obj:
         if line[10] is not '':
             backers.append(int(line[10]))
+
+    #close file object
     csv_file.close() 
+
 #opens csv file to write 
 with open('backers_hist_data.csv', 'w') as hist_obj:
     hist_data = csv.writer(hist_obj,delimiter=',')
-    #writes headers to file
-    ###hist_data.writerows('project_backers', 'frequency')
-
+    
     #init variables
     frq = 0
     bin_ct = 100
@@ -48,8 +49,7 @@ with open('backers_hist_data.csv', 'w') as hist_obj:
         #append "bin,frequency" to a list 
         hist_list.append([b,frq])
 
-        ###hist_data.writerows(zip(str(b),str(frq)))
-        ###print(str(b) + ':',str(frq))
+        #resets frequency counter
         frq = 0
         
         #update the bin range for next frequency count
