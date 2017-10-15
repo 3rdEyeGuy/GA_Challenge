@@ -61,7 +61,7 @@ with open('backers_hist_data.csv', 'w') as hist_obj:
             b = b + bin_ct
 
     #append hist_list values to csv file
-    hist_data.writerow(['project_backers', 'frequency'])
+    ###hist_data.writerow(['project_backers', 'frequency'])
     for bin in hist_list:
         hist_data.writerow(bin)
 
