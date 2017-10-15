@@ -25,7 +25,7 @@ last_camp = 0
 a = 0
 b = 10
 
-while last_camp != num_camps:
+while (b-10) <= max(backers):
     rng = list(range(a,b+1))
 
     for line in backers:
