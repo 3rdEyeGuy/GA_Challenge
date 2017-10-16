@@ -1,4 +1,4 @@
-"""Plots scatterplot of pledge goals vs funded percent of successful campaigns"""
+"""Plots scatterplot of pledge goals vs funded percent of failed campaigns"""
 
 #import classes and modules
 import csv
@@ -17,7 +17,7 @@ with open('DSI_kickstarterscrape_dataset.csv','r', encoding='mac_roman') as csv_
 
     #append pledgeGoal for each project into a list
     for line in csv_reader:
-        if line[6] == 'successful':
+        if line[6] == 'failed':
             pledgeGoal.append(float(line[7]))
 
     #close file object
@@ -35,7 +35,7 @@ bins = list(range(0, int(max(pledgeGoal)+incrmt), incrmt))
 plt.hist(pledgeGoal,bins, histtype='bar',rwidth=1.0)
 plt.ylabel('Number of Campaigns') 
 plt.xlabel('Pledge Goals ($)')
-plt.title('Pledge Goals of Successful Kickstarter Campaigns')
+plt.title('Pledge Goals of Failed Kickstarter Campaigns')
 
 #inserts skewness 1/2 way across x-axis and 3/4 up the y-axis
 #transform allows me to create axes at which 1,1 marks the top right corner of plot
