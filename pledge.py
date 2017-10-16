@@ -1,4 +1,4 @@
-"""Plots scatterplot of pledge goals vs funded percent of failed campaigns"""
+"""histogram of pledge goals vs for failed campaigns"""
 
 #import classes and modules
 import csv
