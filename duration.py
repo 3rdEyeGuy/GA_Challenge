@@ -17,7 +17,7 @@ with open('DSI_kickstarterscrape_dataset.csv','r', encoding='mac_roman') as csv_
     
     #append duration for each project into a list
     for line in csv_reader:
-        if line[6] == 'successful':
+        if line[6] == 'failed':
             duration.append(float(line[16]))
 
     #close file object
@@ -33,9 +33,9 @@ bins = list(range(0, int(max(duration)+incrmt), incrmt))
 
 #create histogram
 plt.hist(duration,bins, histtype='bar',rwidth=1.0)
-plt.ylabel('Number of Successful Campaigns')
+plt.ylabel('Number of Failed Campaigns')
 plt.xlabel('Campaign Duration (days)')
-plt.title('Durations of Successful Kickstarter Campaigns')
+plt.title('Durations of Failed Kickstarter Campaigns')
 
 #inserts skewness 1/2 way across x-axis and 3/4 up the y-axis
 #transform allows me to create axes at which 1,1 marks the top right corner of plot
