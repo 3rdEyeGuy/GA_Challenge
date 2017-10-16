@@ -1,4 +1,4 @@
-"""Plots scatterplot of durations vs pledge amounts for failed campaigns"""
+"""Plots scatterplot of durations vs funded percent for failed campaigns"""
 
 #import classes and modules
 import csv
@@ -14,13 +14,13 @@ with open('DSI_kickstarterscrape_dataset.csv','r', encoding='mac_roman') as csv_
     
     #init list
     duration = []
-    pledge = [] 
+    fundPercnt = [] 
 
     #append duration for each project into a list
     for line in csv_reader:
         if line[6] == 'failed':
             duration.append(float(line[16]))
-            pledge.append(int(line[8]))
+            fundPercnt.append(float(line[9]))
 
     #close file object
     csv_file.close() 
@@ -34,10 +34,10 @@ with open('DSI_kickstarterscrape_dataset.csv','r', encoding='mac_roman') as csv_
 ###bins = list(range(0, int(max(duration)+incrmt), incrmt))
 
 #create histogram
-plt.scatter(duration,pledge)
-plt.ylabel('Pledge Amount ($)')
+plt.scatter(duration,fundPercnt)
+plt.ylabel('Funded Percentage') 
 plt.xlabel('Campaign Duration (days)')
-plt.title('Durations vs. Pledge Amounts of Failed Kickstarter Campaigns')
+plt.title('Duration vs. Funded Percentage of Failed Kickstarter Campaigns')
 
 #inserts skewness 1/2 way across x-axis and 3/4 up the y-axis
 #transform allows me to create axes at which 1,1 marks the top right corner of plot
