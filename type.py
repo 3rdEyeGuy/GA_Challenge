@@ -1,4 +1,4 @@
-"""Bar graph of types of projects vs avg. funded percent (of successful campaigns)"""
+"""Bar graph of types of projects vs avg. pledged (of successful campaigns)"""
 
 #import classes and modules
 import csv
@@ -23,31 +23,37 @@ with open('DSI_kickstarterscrape_dataset.csv','r', encoding='mac_roman') as csv_
     #append entire data set into a list
     for line in csv_reader:
         if line[6] == 'successful':
-            dataRaw.append([int(line[0]),str(line[3]),float(line[9])])
+            dataRaw.append([int(line[0]),str(line[3]),float(line[8])])
 
     #close file object
     csv_file.close()
 
-#Append only unique data into a list
+#correct category typo
+#append only unique data into a list
+typo = 'Film &amp; Video'
+correct = 'Film & Video'
 for dataR in dataRaw:
+    if dataR[1] == typo:
+        dataR[1] = correct
+
     if dataR[0] in data:
         continue
     else: data.append([dataR[1],dataR[2]])
 
 #creates a list of unique types
-for typF in data:
-    if typF[0] in types:
+for typP in data:
+    if typP[0] in types:
         continue
-    else: types.append(typF[0])
+    else: types.append(typP[0])
 
-#create a dict with campaign categories and funding percentages
+#create a dict with campaign categories and pledges
 for typ in types:
-    fundPrcnt = []
-    for fund in data:
-        if typ == fund[0]:
-            fundPrcnt.append(float(fund[1]))
-    avgfundPrcnt = statistics.mean(fundPrcnt)
-    typeDict[typ] = avgfundPrcnt 
+    pledge = []
+    for pldg in data:
+        if typ == pldg[0]:
+            pledge.append(float(pldg[1]))
+    avgpledge = statistics.mean(pledge)
+    typeDict[typ] = avgpledge 
 
 #sort dict
 typeDict = collections.OrderedDict(sorted(typeDict.items()))
@@ -58,9 +64,9 @@ plt.bar(range(len(typeDict)), typeDict.values(), align = 'center')
 plt.xticks(range(len(typeDict)), typeDict.keys())
 
 #set bar graph title and labels
-plt.ylabel('Average Funded Percent') 
+plt.ylabel('Average Pledge ($)') 
 plt.xlabel('Categories')
-plt.title('The Average Funded Percents of Kickstarter Campaign Categories')
+plt.title('The Average Pledges of Kickstarter Campaigns by Categories')
 
 #show bar graph
 plt.show()
