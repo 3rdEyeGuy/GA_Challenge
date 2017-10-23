@@ -13,6 +13,7 @@ with open('DSI_kickstarterscrape_dataset.csv','r', encoding='mac_roman') as csv_
     #init list
     dataRaw = []
     backers=[]
+    data=[]
 
     #append entire data set into a list
     for line in csv_reader:
@@ -23,10 +24,13 @@ with open('DSI_kickstarterscrape_dataset.csv','r', encoding='mac_roman') as csv_
 
 #append only unique data into backers list
 for dataR in dataRaw:
-    if dataR[0] in backers:
+    if dataR[0] in data:
         continue
     elif dataR[1] is not '': 
-        backers.append(dataR[1])
+        data.append([dataR[0],dataR[1]])
+
+for dt in data:
+    backers.append(dt[1])
 
 #calculates Pearson's skewness coefficient
 skew = skew(backers)
