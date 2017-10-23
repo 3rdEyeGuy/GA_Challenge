@@ -38,20 +38,20 @@ for dataR in dataRaw:
 
     if dataR[0] in data:
         continue
-    else: data.append([dataR[1],dataR[2]])
+    else: data.append([dataR[0],dataR[1],dataR[2]])
 
 #creates a list of unique types
 for typF in data:
-    if typF[0] in types:
+    if typF[1] in types:
         continue
-    else: types.append(typF[0])
+    else: types.append(typF[1])
 
 #create a dict with campaign categories and funding percentages
 for typ in types:
     fundPrcnt = []
     for fund in data:
-        if typ == fund[0]:
-            fundPrcnt.append(float(fund[1]))
+        if typ == fund[1]:
+            fundPrcnt.append(float(fund[2]))
     avgfundPrcnt = statistics.mean(fundPrcnt)
     typeDict[typ] = avgfundPrcnt 
 
