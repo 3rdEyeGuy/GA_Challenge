@@ -11,19 +11,30 @@ with open('DSI_kickstarterscrape_dataset.csv','r', encoding='mac_roman') as csv_
     
     #skip headers 
     next(csv_reader)
-    
-    #init list
-    duration = []
-    fundPercnt = [] 
 
-    #append duration for each project into a list
+    #init list
+    dataRaw = []
+    data = []
+    duration=[]
+    fundPercnt = []
+
+    #append entire data set into a list
     for line in csv_reader:
-        if line[6] == 'successful':
-            duration.append(float(line[16]))
-            fundPercnt.append(float(line[9]))
+        dataRaw.append([int(line[0]),str(line[6]),float(line[9]),float(line[16])])
 
     #close file object
-    csv_file.close() 
+    csv_file.close()
+
+#append only unique data into duration list
+for dataR in dataRaw:
+    if dataR[0] in data:
+        continue
+    else: data.append([dataR[0],dataR[1],dataR[2],dataR[3]])
+
+for dt in data:
+    if dt[1] == 'successful': 
+        fundPercnt.append(dt[2])
+        duration.append(dt[3])
 
 #calculates Pearson's skewness coefficient
 ###skew = skew(duration)
@@ -45,3 +56,5 @@ plt.title('Duration vs. Funded Percentage of Successful Kickstarter Campaigns')
 
 #show histogram
 plt.show()
+
+
