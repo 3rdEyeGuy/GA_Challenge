@@ -13,6 +13,7 @@ with open('DSI_kickstarterscrape_dataset.csv','r', encoding='mac_roman') as csv_
 
     #init list
     dataRaw = []
+    data=[]
     duration=[]
 
     #append entire data set into a list
@@ -24,10 +25,14 @@ with open('DSI_kickstarterscrape_dataset.csv','r', encoding='mac_roman') as csv_
 
 #append only unique data into duration list
 for dataR in dataRaw:
-    if dataR[0] in duration:
+    if dataR[0] in data:
         continue
     elif dataR[1] is not '': 
-        duration.append(dataR[1])
+        data.append([dataR[0],dataR[1]])
+
+for dt in data:
+    duration.append(dt[1])
+
 #calculates Pearson's skewness coefficient
 skew = skew(duration)
 
