@@ -11,18 +11,29 @@ with open('DSI_kickstarterscrape_dataset.csv','r', encoding='mac_roman') as csv_
     
     #skip headers 
     next(csv_reader)
-    
-    #init list
-    pledgeGoal = []
 
-    #append pledgeGoal for each project into a list
+    #init list
+    dataRaw = []
+    data = []
+    pledgeGoal=[]
+
+    #append entire data set into a list
     for line in csv_reader:
-        if line[6] == 'failed':
-            pledgeGoal.append(float(line[7]))
+        dataRaw.append([int(line[0]),str(line[6]),float(line[7])])
 
     #close file object
-    csv_file.close() 
+    csv_file.close()
 
+#append only unique data into pledgeGoal list
+for dataR in dataRaw:
+    if dataR[0] in data:
+        continue
+    else: data.append([dataR[0],dataR[1],dataR[2]])
+
+for dt in data:
+    if dt[1] == 'failed': 
+        pledgeGoal.append(dt[2])
+        
 #calculates Pearson's skewness coefficient
 skew = skew(pledgeGoal)
 
@@ -43,3 +54,5 @@ plt.text(0.5,0.75,r'Skew ={}'.format(skew),transform=plt.gca().transAxes)
 
 #show histogram
 plt.show()
+
+
