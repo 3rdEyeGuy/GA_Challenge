@@ -26,7 +26,7 @@ for dataR in dataRaw:
     if dataR[0] in backers:
         continue
     elif dataR[1] is not '': 
-        backers.append(int(dataR[1]))
+        backers.append(dataR[1])
 
 #calculates Pearson's skewness coefficient
 skew = skew(backers)
