@@ -4,7 +4,6 @@
 import csv
 import matplotlib.pyplot as plt
 from scipy.stats import skew
-import numpy as np
 
 #assign csv file to a readable object
 with open('DSI_kickstarterscrape_dataset.csv','r', encoding='mac_roman') as csv_file:
@@ -49,17 +48,11 @@ incrmt = 5
 #init list of bins
 bins = list(range(0, int(max(duration)+incrmt), incrmt))
 
-#convert to numpy array
-duration = np.array(duration)
-
 #create histogram
-fig = plt.figure()
-ax = fig.add_subplot(111)
-n, bins, patches = ax.hist(duration, weights=np.ones_like(duration)/duration.size) 
-###plt.hist(duration,bins, histtype = 'bar', alpha = 1)
+plt.hist(duration,bins, histtype = 'bar', alpha = 1)
 
 #y-axis scale mod
-ax.set_ylim([0,8500])
+plt.gca().set_ylim([0,8500])
 
 #label hist
 plt.ylabel('Number of Campaigns') 
