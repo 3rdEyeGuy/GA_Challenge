@@ -17,7 +17,8 @@ with open('DSI_kickstarterscrape_dataset.csv','r', encoding='mac_roman') as csv_
     data = []
     duration=[]
 
-    #init 30-35 duration count
+    #init total and 30-35 duration count
+    count = 0
     count30 = 0
     #append entire data set into a list
     for line in csv_reader:
@@ -35,6 +36,7 @@ for dataR in dataRaw:
 for dt in data:
     if dt[1] == 'successful': 
         duration.append(dt[3])
+        count += 1
         if 30 <= dt[3] < 35:
             count30 += 1
 
@@ -56,6 +58,7 @@ plt.title('Durations of Successful Kickstarter Campaigns')
 #transform allows me to create axes at which 1,1 marks the top right corner of plot
 plt.text(0.4,0.75,r'Skew: {}'.format(skew),transform=plt.gca().transAxes) 
 plt.text(0.4,0.70,r'Campaigns running 30-34 days: {}'.format(count30),transform=plt.gca().transAxes) 
+plt.text(0.4,0.65,r'Total campaigns: {}'.format(count),transform=plt.gca().transAxes) 
 
 #show histogram
 plt.show()
