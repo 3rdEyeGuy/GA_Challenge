@@ -4,6 +4,7 @@
 import csv
 import matplotlib.pyplot as plt
 from scipy.stats import skew
+import numpy as np
 
 #assign csv file to a readable object
 with open('DSI_kickstarterscrape_dataset.csv','r', encoding='mac_roman') as csv_file:
@@ -47,15 +48,16 @@ skew = round(skew(duration), 3)
 incrmt = 5 
 #init list of bins
 bins = list(range(0, int(max(duration)+incrmt), incrmt))
-
+duration_ar = np.array(duration)
 #create histogram
-plt.hist(duration,bins, histtype = 'bar', alpha = 1)
+weights = np.ones_like(duration_ar)/float(len(duration_ar))
+plt.hist(duration_ar,bins, histtype = 'bar', alpha = 1, weights = weights)
 
 #y-axis scale mod
-plt.gca().set_ylim([0,8500])
+###plt.gca().set_ylim([0,8500])
 
 #label hist
-plt.ylabel('Number of Campaigns') 
+plt.ylabel('Relative Frequency') 
 plt.xlabel('Campaign Duration (days)')
 plt.title('Durations of Failed Kickstarter Campaigns')
 
