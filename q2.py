@@ -36,7 +36,7 @@ for dt in data:
 skew = skew(backers)
 
 #init bin size
-incrmt = 100
+incrmt = 20 
 #init list of bins
 bins = list(range(0, max(backers)+incrmt, incrmt))
 
@@ -53,4 +53,4 @@ plt.text(0.5,0.75,r'Skew ={}'.format(skew),transform=plt.gca().transAxes)
 #show histogram
 plt.show()
 
-
+print('Skew of backers distribution is to the right at:',str(round(skew,2)))
