@@ -3,7 +3,6 @@
 #import methods
 import csv
 import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches
 from scipy.stats import skew
 import numpy as np
 
@@ -39,6 +38,7 @@ for dataR in dataRaw:
         continue
     else: data.append([dataR[0],dataR[1],dataR[2],dataR[3]])
 
+#create lists of total,failed and successful durations
 for dt in data:
     durationTot.append(dt[3])
     if dt[1] == 'failed': 
@@ -65,34 +65,27 @@ durationTot_ar = np.array(durationTot)
 durationF_ar = np.array(durationF)
 durationS_ar = np.array(durationS)
 
-#create histogram
-###weights = np.ones_like(durationTot_ar)/float(len(durationTot_ar))
-weightS = np.ones_like(durationS_ar)/float(len(durationS_ar))
-weightF = np.ones_like(durationF_ar)/float(len(durationF_ar))
-plt.hist(durationF_ar,bins, histtype = 'bar', alpha = 0.5, weights = weightF, color = 'r', label = 'Failed campaigns')
+#normalization weights
+weightS = np.ones_like(durationS_ar)/float(len(durationS_ar)+len(durationF_ar))
+weightF = np.ones_like(durationF_ar)/float(len(durationS_ar)+len(durationF_ar))
+
+#create hists
 plt.hist(durationS_ar,bins, histtype = 'bar', alpha = 0.5, weights = weightS, color = 'b', label = 'Successful campaigns')
-
-
-#y-axis scale mod
-###plt.gca().set_ylim([0,8500])
+plt.hist(durationF_ar,bins, histtype = 'bar', alpha = 0.5, weights = weightF, color = 'r', label = 'Failed campaigns')
 
 #label hist
 plt.ylabel('Relative Frequency') 
 plt.xlabel('Campaign Duration (days)')
 plt.title('Durations of Kickstarter Campaigns')
+plt.grid()
 
 #legend
 plt.legend(loc='upper right')
-###failed_patch = mpatches.Patch(color = 'r',label = 'Failed Campaigns')
-###success_patch = mpatches.Patch(color = 'b',label = 'Successful Campaigns')
-###plt.legend(handles = [success_patch, failed_patch])
 
 #inserts skewness 1/2 way across x-axis and 3/4 up the y-axis
 #transform allows me to create axes at which 1,1 marks the top right corner of plot
-plt.text(0.4,0.75,r'Skew: {}'.format(skewF),transform=plt.gca().transAxes, color= 'r') 
-plt.text(0.4,0.70,r'Skew: {}'.format(skewS),transform=plt.gca().transAxes, color= 'b') 
-###plt.text(0.4,0.70,r'Campaigns running 30-34 days: {}'.format(countF30),transform=plt.gca().transAxes, color = 'r') 
-###plt.text(0.4,0.65,r'Total campaigns: {}'.format(countF),transform=plt.gca().transAxes) 
+plt.text(0.4,0.81,r'Skew: {}'.format(skewS),transform=plt.gca().transAxes, color= 'b') 
+plt.text(0.4,0.77,r'Skew: {}'.format(skewF),transform=plt.gca().transAxes, color= 'r') 
 
 #show histogram
 plt.show()
