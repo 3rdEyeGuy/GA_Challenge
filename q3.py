@@ -53,4 +53,5 @@ plt.text(0.5,0.75,r'Skew ={}'.format(skew),transform=plt.gca().transAxes)
 
 #show histogram
 plt.show()
-
+print('The \'duration\' variable is NOT normally distributed.')
+print('The skew is to the right at:',str(round(skew,2)))
