@@ -1,4 +1,4 @@
-"""Plots hist of campaign durations for successful campaigns"""
+"""Plots hist of campaign durations for failed campaigns"""
 
 #import classes and modules
 import csv
@@ -18,6 +18,7 @@ with open('DSI_kickstarterscrape_dataset.csv','r', encoding='mac_roman') as csv_
     duration=[]
 
     #init 30-35 duration count
+    count = 0
     count30 = 0
     #append entire data set into a list
     for line in csv_reader:
@@ -33,8 +34,9 @@ for dataR in dataRaw:
     else: data.append([dataR[0],dataR[1],dataR[2],dataR[3]])
 
 for dt in data:
-    if dt[1] == 'successful': 
+    if dt[1] == 'failed': 
         duration.append(dt[3])
+        count += 1
         if 30 <= dt[3] < 35:
             count30 += 1
 
@@ -50,13 +52,13 @@ bins = list(range(0, int(max(duration)+incrmt), incrmt))
 plt.hist(duration,bins, histtype = 'bar', alpha = 1)
 plt.ylabel('Number of Campaigns') 
 plt.xlabel('Campaign Duration (days)')
-plt.title('Durations of Successful Kickstarter Campaigns')
+plt.title('Durations of Failed Kickstarter Campaigns')
 
 #inserts skewness 1/2 way across x-axis and 3/4 up the y-axis
 #transform allows me to create axes at which 1,1 marks the top right corner of plot
 plt.text(0.4,0.75,r'Skew: {}'.format(skew),transform=plt.gca().transAxes) 
 plt.text(0.4,0.70,r'Campaigns running 30-34 days: {}'.format(count30),transform=plt.gca().transAxes) 
-
+plt.text(0.4,0.65,r'Total campaigns: {}'.format(count),transform=plt.gca().transAxes) 
 #show histogram
 plt.show()
 
