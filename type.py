@@ -1,4 +1,4 @@
-"""Bar graph of types of projects vs avg. funded percent (of successful campaigns)"""
+"""Bar graph of types of projects vs med. funded percent (of successful campaigns)"""
 
 #import classes and modules
 import csv
@@ -52,8 +52,8 @@ for typ in types:
     for fund in data:
         if typ == fund[1]:
             fundPrcnt.append(float(fund[2]))
-    avgfundPrcnt = statistics.mean(fundPrcnt)
-    typeDict[typ] = avgfundPrcnt 
+    medfundPrcnt = statistics.median(fundPrcnt)
+    typeDict[typ] = medfundPrcnt 
 
 #sort dict
 typeDict = collections.OrderedDict(sorted(typeDict.items()))
@@ -64,9 +64,9 @@ plt.bar(range(len(typeDict)), typeDict.values(), align = 'center')
 plt.xticks(range(len(typeDict)), typeDict.keys())
 
 #set bar graph title and labels
-plt.ylabel('Average Funded Percent (1 = 100%)') 
+plt.ylabel('Median Funded Percent (1 = 100%)') 
 plt.xlabel('Categories')
-plt.title('The Average Funded Percents of Kickstarter Campaigns by Categories')
+plt.title('The Average Funded Percents of Successful Kickstarter Campaigns by Categories')
 
 #show bar graph
 plt.show()
