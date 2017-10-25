@@ -18,16 +18,10 @@ with open('DSI_kickstarterscrape_dataset.csv','r', encoding='mac_roman') as csv_
     data = []
     durationF=[]
     durationS = []
-    durationTot = []
     
-    #init 30-35 duration count
-    countF = 0
-    countF30 = 0
-    countS = 0
-    countS30 = 0
     #append entire data set into a list
     for line in csv_reader:
-        dataRaw.append([int(line[0]),str(line[6]),float(line[9]),float(line[16])])
+        dataRaw.append([int(line[0]),str(line[6]),float(line[16])])
 
     #close file object
     csv_file.close()
@@ -36,21 +30,14 @@ with open('DSI_kickstarterscrape_dataset.csv','r', encoding='mac_roman') as csv_
 for dataR in dataRaw:
     if dataR[0] in data:
         continue
-    else: data.append([dataR[0],dataR[1],dataR[2],dataR[3]])
+    else: data.append([dataR[0],dataR[1],dataR[2]])
 
-#create lists of total,failed and successful durations
+#create lists of failed and successful durations
 for dt in data:
-    durationTot.append(dt[3])
     if dt[1] == 'failed': 
-        durationF.append(dt[3])
-        countF += 1
-        if 30 <= dt[3] < 35:
-            countF30 += 1
+        durationF.append(dt[2])
     elif dt[1] == 'successful':
-        durationS.append(dt[3])
-        countS += 1
-        if 30 <= dt[3] < 35:
-            countS30 += 1
+        durationS.append(dt[2])
 
 #calculates Pearson's skewness coefficient
 skewF = round(skew(durationF), 3)
@@ -59,9 +46,8 @@ skewS = round(skew(durationS), 3)
 #init bin size
 incrmt = 5 
 #init list of bins
-bins = list(range(0, int(max(durationF)+incrmt), incrmt))
+bins = list(range(0, int(max(durationS)+incrmt), incrmt))
 #convert to numpy arrays
-durationTot_ar = np.array(durationTot)
 durationF_ar = np.array(durationF)
 durationS_ar = np.array(durationS)
 
