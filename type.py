@@ -66,7 +66,7 @@ plt.xticks(range(len(typeDict)), typeDict.keys())
 #set bar graph title and labels
 plt.ylabel('Median Funded Percent (1 = 100%)') 
 plt.xlabel('Categories')
-plt.title('The Average Funded Percents of Successful Kickstarter Campaigns by Categories')
+plt.title('The Median of Funded Percents for Successful Kickstarter Campaigns by Categories')
 
 #show bar graph
 plt.show()
