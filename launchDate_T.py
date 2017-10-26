@@ -43,11 +43,8 @@ for dt in data:
 for dayOne in dateReq:
     if (dayOne[0] == 5 and dayOne[1] == 1):
         timePre = dayOne[2].split(':')
-        print(timePre)
         time.append(int(timePre[0]))
-        print(int(timePre[0]))
 
-print(time)
 #calculates Pearson's skewness coefficient
 skew = skew(time)
 

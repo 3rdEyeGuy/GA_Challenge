@@ -1,4 +1,4 @@
-"""histogram of pledge goals vs for failed campaigns"""
+"""histogram of successful campaigns for each month"""
 
 #import classes and modules
 import csv
